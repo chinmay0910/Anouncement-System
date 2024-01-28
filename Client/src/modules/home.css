@@ -1,0 +1,21 @@
+.sidenav_buttons a{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 1rem !important;
+    font-size: 1.25rem !important;
+    line-height: 1.75rem !important;
+    text-align: center !important;
+}
+
+@media screen and (max-width: 1222px) {
+    a{
+        padding: 0.75rem !important;
+    }
+
+    a h1{
+        display: none;
+    }
+}
