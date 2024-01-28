@@ -1,5 +1,6 @@
 import React from 'react'
 
+<<<<<<< HEAD
 export const Input = ({type, name, placeholder, label, className, value, classNameDiv, onChange}) => {
 
   const handleChange = (event) => {
@@ -26,3 +27,14 @@ const getCurrentDate = () => {
   const day = String(today.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 };
+=======
+export const Input = ({type, name, placeholder, label, className}) => {
+  return (
+    <div className='flex flex-col mx-8 pt-8 w-[45%]'>
+        <label htmlFor={name}>{label}</label>
+        <input type={type} name={name} className={`rounded-sm border-2 p-2 ${className}`} placeholder={placeholder}/>
+    </div>
+  )
+}
+    
+>>>>>>> 519c15bd33e323ed974b1989243b95911e6c350d
