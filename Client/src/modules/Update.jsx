@@ -11,12 +11,12 @@ export const Update = () => {
         <div className="mt-16 text-lg font-semibold">
             <div className="flex flex-col">
                 <div className="flex flex-row bg-white border-black border-2 mx-[14%] rounded-xl shadow-lg">
-                    <input type="text" className='p-4 rounded-xl outline-none w-[96%]' placeholder='Search with FIR No.' />
+                    <input type="text" className='p-4 rounded-xl outline-none w-[96%]' placeholder='Search with Announcement No.' />
                     <IconSearch className='my-auto' />
                 </div>
                 <div className="flex flex-col mx-[14%] mt-12">
-                    <UpdateFeild  firno="1245" name="Pradip Garhwal" reason="Wife Request for Dowry"/>
-                    <UpdateFeild  firno="1246" name="Shivam Mahadik" reason="VIT me bhi Rajasthan jaisa pani nahi milta"/>
+                    <UpdateFeild  ann_no="1245" name="National Anthem" location="Entire college "/>
+                    <UpdateFeild  ann_no="1246" name="special Announcement" location="M block "/>
                 </div>
             </div>
 
