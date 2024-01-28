@@ -13,13 +13,15 @@ export const Announcement = () => {
                         <Input type="text" name="Announcement_Name" placeholder="eg. National Anthem" label="Anouncement Name " className="" />
                         <Input type="text" name="Description" placeholder="Atleast 5 - 6 words of Description" label="Description:" className="" />
                     </div>
-                    <div className="flex flex-row">
-                        <Input type="date" name="date"  label="Start date" className="" />
-                        <Input type="date" name="date"  label="End date" className="" />
-                    </div>
-                    <div className="flex flex-row">
-                        <Input type="time" name="time"  label="time" className="" />
-                        <Input type="file" name="file"  label="Attachment " className="" />
+                    <div className="w-full flex flex-row flex-wrap">
+                        <div className="flex flex-row w-1/2">
+                            <Input type="date" name="date" label="Start date" className="" />
+                            <Input type="date" name="date" label="End date" className="" />
+                        </div>
+                        <div className="flex flex-row w-1/2">
+                            <Input type="time" name="time" label="Time: " classNameDiv="w-[40%]" />
+                            <Input type="file" name="file" label="Attachment " className="" />
+                        </div>
                     </div>
                 </div>
                 <button className='block p-2 bg-blue-600 rounded-lg w-1/5 mx-auto mt-8 text-white font-semibold'>ADD</button>
