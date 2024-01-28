@@ -37,7 +37,7 @@ export const SideNav = () => {
                     :
                     ""
             } */}
-            <NavLink to='/register' className={({ isActive }) => isActive ? "bg-blue-200" : "hover:bg-[#F0F6FF]"}>
+            <NavLink to='/schedule' className={({ isActive }) => isActive ? "bg-blue-200" : "hover:bg-[#F0F6FF]"}>
                 <IconCalendarTime className='md:mx-8' /><h1> Schedule </h1>
             </NavLink>
             <NavLink to='/createpost' role='button' className={({ isActive }) => isActive ? "bg-blue-200" : "hover:bg-[#F0F6FF]"}>

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 
 // Component Imports , RegisterPage, Update, UpdateStatus, CreatePost, AddStaff 
-import { TopNavigation, SideNav} from './index'
+import { TopNavigation, SideNav, ScheduleAnouncementsPage} from './index'
 import './Home.css'
 
 // React-Router Imports
@@ -31,7 +31,7 @@ export const Home = () => {
                     <div className="right_Home lg:w-[80%]">
                         <Routes>
                             <Route exact path='/' element={<>Hello ji namste ji</>} />
-                            <Route exact path='/register' element={<>Hello ji register ji</>} />
+                            <Route exact path='/schedule' element={<ScheduleAnouncementsPage />} />
                             {/* <Route exact path='/addstaff' element={<AddStaff />} />
                             <Route exact path='/update' element={<Update />} />
                             <Route exact path='/update/status/:id' element={<UpdateStatus />} />
