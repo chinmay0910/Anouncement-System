@@ -47,7 +47,7 @@ const CampusRoomSelector = ({ onSubmit }) => {
         // You can perform any side effect or data submission here
         // For example, you can call onSubmit with the selected data
         onSubmit({ selectedCampuses, availableRooms });
-    }, [selectedCampuses, availableRooms, onSubmit]);
+    }, [selectedCampuses, availableRooms]);
 
     return (
         <div>
@@ -71,9 +71,11 @@ const CampusRoomSelector = ({ onSubmit }) => {
                     </div>
                 </div>
                 {/* Checkboxes for available rooms */}
-                <div className="flex flex-col w-1/2 h-[120px] overflow-y-auto mx-4 my-8 border-2 rounded-md">
+                <div className="flex flex-col w-1/2 mx-4 my-8 border-2 rounded-md">
                     <h3 className='mx-2'>Block / Room Details: </h3><hr className='mx-2' />
+                    <div className='h-[100px] overflow-y-auto '>
                     {renderRoomCheckboxes()}
+                    </div>
                 </div>
             </div>
         </div>

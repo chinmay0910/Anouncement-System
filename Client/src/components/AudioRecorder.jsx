@@ -1,11 +1,12 @@
 import { useState, useRef } from "react";
-const AudioRecorder = () => {
+const AudioRecorder = ({ onAudioRecordingComplete }) => {
     const [permission, setPermission] = useState(false);
     const mediaRecorder = useRef(null);
     const [recordingStatus, setRecordingStatus] = useState("inactive");
     const [stream, setStream] = useState(null);
     const [audioChunks, setAudioChunks] = useState([]);
     const [audio, setAudio] = useState(null);
+    const [base64Display, setBase64Display] = useState(null);
 
     const mimeType = "audio/webm";
 
@@ -50,10 +51,26 @@ const AudioRecorder = () => {
         mediaRecorder.current.onstop = () => {
             //creates a blob file from the audiochunks data
             const audioBlob = new Blob(audioChunks, { type: mimeType });
+            // console.log(audioBlob);
             //creates a playable URL from the blob file.
             const audioUrl = URL.createObjectURL(audioBlob);
             setAudio(audioUrl);
             setAudioChunks([]);
+            
+            // Create a FileReader to read the blob data
+            const reader = new FileReader();
+            reader.readAsDataURL(audioBlob);
+
+            // When the FileReader has finished, set the Base64 data and log it
+            reader.onloadend = () => {
+                const audioBase64 = reader.result;
+                setAudio(audioBase64);
+                setBase64Display(audioBase64);
+                setAudioChunks([]);
+
+                // Call the callback function in the parent component
+                onAudioRecordingComplete(audioBase64);
+            };
         };
     };
 
