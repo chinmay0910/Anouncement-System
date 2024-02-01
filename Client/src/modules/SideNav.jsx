@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import './Home.css'
+import './home.css'
 // import UserContext from "../context/UserContext";
 
 // React Router imports

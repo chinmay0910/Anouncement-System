@@ -95,6 +95,7 @@ export const ScheduleAnouncementsPage = () => {
                         </div>
                     </div>
                     <CampusRoomSelector onSubmit={handlechangeSubmit} />
+                    <Input type="text" name="audioFileName" label="Audio File Name:" onChange={handleChange} placeholder="eg. Nation"/>
                 </div>
                 <button className="block p-2 bg-blue-600 rounded-lg w-1/5 mx-auto mt-8 text-white font-semibold">Add Announcement</button>
             </form>

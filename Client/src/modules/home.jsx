@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 
 // Component Imports , RegisterPage, Update, UpdateStatus, CreatePost, AddStaff 
 import { TopNavigation, SideNav, ScheduleAnouncementsPage, Announcement,Update} from './index'
-import './Home.css'
+import './home.css'
 
 // React-Router Imports
 import { Routes, Route, useNavigate, useParams } from 'react-router-dom'
