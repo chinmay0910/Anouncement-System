@@ -10,22 +10,16 @@ export const ScheduleAnouncementsPage = () => {
     const [formData, setFormData] = useState({
         AnouncementName: '',
         Description: '',
-        date: '',
+        date: null,
         time: '',
         audio: '',
+        everyday: false,
     });
 
     const [selectedData, setSelectedData] = useState({
         selectedCampuses: [],
         availableRooms: [],
     });
-
-    const handleChange = (fieldName, value) => {
-        setFormData((prevData) => ({
-            ...prevData,
-            [fieldName]: value,
-        }));
-    };
 
     const handlechangeSubmit = (data) => {
         setSelectedData(data);
@@ -37,6 +31,33 @@ export const ScheduleAnouncementsPage = () => {
             ...prevData,
             audio: audioBase64,
         }));
+    };
+
+    const handleChange = (fieldName, value) => {
+        if (fieldName === 'everyday') {
+            setFormData((prevData) => ({
+                ...prevData,
+                everyday: !prevData.everyday,
+            }));
+        } else {
+            setFormData((prevData) => ({
+                ...prevData,
+                [fieldName]: value,
+            }));
+        }
+    };
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setFormData((prevData) => ({
+                    ...prevData,
+                    audio: reader.result,
+                }));
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -64,7 +85,8 @@ export const ScheduleAnouncementsPage = () => {
                 AnouncementName: '',
                 Description: '',
                 date: '',
-                time: '',
+                time: null,
+                everyday: false,
             });
             setSelectedData({
                 selectedCampuses: [],
@@ -87,15 +109,45 @@ export const ScheduleAnouncementsPage = () => {
                     </div>
                     <div className="flex flex-row w-full">
                         <div className="flex flex-row w-1/2">
-                            <Input type="date" name="date" label="Date:" className="" onChange={handleChange} />
-                            <Input type="time" name="time" label="Time:" classNameDiv="ms-0 w-[41%]" onChange={handleChange} />
+                            <div className="flex items-center my-auto mx-8">
+                                <input
+                                    type="checkbox"
+                                    id="everyday"
+                                    name="everyday"
+                                    checked={formData.everyday}
+                                    onChange={() => handleChange('everyday')}
+                                    className="h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring focus:ring-blue-200 focus:outline-none"
+                                />
+                                <label htmlFor="everyday" className="ml-2 text-gray-700">
+                                    Everyday
+                                </label>
+                            </div>
+                            {formData.everyday ? <Input type="time" name="time" label="Time:" classNameDiv="ms-0 w-[41%]" onChange={handleChange} /> : (
+                                <Input type="date" name="date" label="Date:" className="" onChange={handleChange} />
+                            )}
+                            {/* <Input type="time" name="time" label="Time:" classNameDiv="ms-0 w-[41%]" onChange={handleChange} /> */}
                         </div>
+                        {
+                            !formData.everyday &&
+                            <Input type="time" name="time" label="Time:" classNameDiv="ms-0 w-[41%]" onChange={handleChange} />
+                        }
                         <div className="w-1/2 pt-8">
-                            <AudioRecorder onAudioRecordingComplete={handleAudioRecordingComplete}/>
+                            {/* <AudioRecorder onAudioRecordingComplete={handleAudioRecordingComplete} /> */}
+                            <label htmlFor="audioFile" className="bg-green-300 w-[90%] py-2 rounded-lg text-green-900 text-center mt-1 mb-4 border-none focus:outline-none block mt-8 cursor-pointer">
+                                Upload MP3 File
+                            </label>
+                            <input
+                                type="file"
+                                id="audioFile"
+                                name="audioFile"
+                                accept="audio/mpeg"
+                                onChange={handleFileChange}
+                                className="hidden"
+                            />
                         </div>
                     </div>
                     <CampusRoomSelector onSubmit={handlechangeSubmit} />
-                    <Input type="text" name="audioFileName" label="Audio File Name:" onChange={handleChange} placeholder="eg. Nation"/>
+                    <Input type="text" name="audioFileName" label="Audio File Name:" onChange={handleChange} placeholder="eg. Nation" />
                 </div>
                 <button className="block p-2 bg-blue-600 rounded-lg w-1/5 mx-auto mt-8 text-white font-semibold">Add Announcement</button>
             </form>

@@ -66,7 +66,7 @@ db.connect((err) => {
         id INT AUTO_INCREMENT PRIMARY KEY,
         AnouncementName VARCHAR(255) NOT NULL,
         Description TEXT NOT NULL,
-        date DATE NOT NULL,
+        date DATE,
         time VARCHAR(255) NOT NULL,
         audio TEXT NOT NULL,
         selectedCampuses JSON NOT NULL,
@@ -106,6 +106,21 @@ app.post('/api/add', upload.single('audio'), (req, res) => {
         }
         console.log('Announcement created successfully');
         res.status(200).json({ message: 'Announcement created successfully' });
+    });
+});
+
+// Endpoint to fetch announcements
+app.get('/api/announcements', (req, res) => {
+    const selectQuery = 'SELECT * FROM announcements';
+
+    db.query(selectQuery, (err, result) => {
+        if (err) {
+            console.error('Error fetching data:', err);
+            res.status(500).json({ error: 'Failed to fetch data' });
+            return;
+        }
+
+        res.json(result);
     });
 });
 
