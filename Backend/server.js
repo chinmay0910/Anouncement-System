@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const multer = require('multer');
+const fs = require('fs');
 
 
 const app = express();
@@ -12,8 +13,6 @@ const PORT = 5000;
 app.use(cors());
 // app.use(bodyParser.json());
 app.use(bodyParser.json({ limit: '50mb' })); 
-
-const fs = require('fs');
 
 function createAudioFileFromBase64(base64Data, audioFileName) {
     const base64WithoutPrefix = base64Data.replace(/^data:[^;]+;base64,/, '');
@@ -105,6 +104,45 @@ app.post('/api/add', upload.single('audio'), (req, res) => {
             return;
         }
         console.log('Announcement created successfully');
+
+        // Add a new cronjob to note.txt
+        // const cronExpression = `${formData.time} ${formData.date} * *`;
+        // const cronCommand = 'YourCronCommandHere'; // Replace with your actual cron command
+        // const cronJobEntry = `${cronExpression} ${cronCommand}\n`;
+
+        const dateTime = new Date(`${formData.date} ${formData.time}`);
+
+        let minute = dateTime.getMinutes();
+        let hour = dateTime.getHours();
+        const day = dateTime.getUTCDate();
+        const month = dateTime.getUTCMonth()+1;
+
+        // minute hour day month dayOFWeek commandToExecute
+        if (minute < 3) {
+            minute += 60;  // Add 60 minutes to handle negative values
+            hour -= 1;     // Subtract 1 from hour to adjust
+        }
+    
+        // Calculate times for each entry
+        const threeMinutesBefore = `${minute - 2} ${hour} ${day} ${month}`;
+        const twoMinutesBefore = `${minute - 1} ${hour} ${day} ${month}`;
+        const givenTime = `${minute > 59 ? minute - 60 : minute} ${hour + (minute > 59 ? 1 : 0)} ${day} ${month}`;
+    
+        // Add cron job entries to note.txt
+        const cronJobEntry1 = `${threeMinutesBefore} * mpc clear\n`;
+        const cronJobEntry2 = `${twoMinutesBefore} * mpc add ${formData.audioFileName}.mp3\n`;
+        const cronJobEntry3 = `${givenTime} * mpc play\n`;
+
+        const cronJobEntry = "\n"+cronJobEntry1+cronJobEntry2+cronJobEntry3;
+
+        fs.appendFile('note.txt', cronJobEntry, (err) => {
+            if (err) {
+                console.error('Error adding cronjob to note.txt:', err);
+            } else {
+                console.log('Cronjob added to note.txt');
+            }
+        });
+
         res.status(200).json({ message: 'Announcement created successfully' });
     });
 });

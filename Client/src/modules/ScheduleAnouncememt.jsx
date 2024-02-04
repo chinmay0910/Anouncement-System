@@ -55,10 +55,15 @@ export const ScheduleAnouncementsPage = () => {
                     ...prevData,
                     audio: reader.result,
                 }));
+    
+                // Extract the file name and set it as the label
+                const fileName = file.name;
+                document.getElementById('audioFileLabel').innerText = `Uploaded: ${fileName}`;
             };
             reader.readAsDataURL(file);
         }
     };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -133,7 +138,7 @@ export const ScheduleAnouncementsPage = () => {
                         }
                         <div className="w-1/2 pt-8">
                             {/* <AudioRecorder onAudioRecordingComplete={handleAudioRecordingComplete} /> */}
-                            <label htmlFor="audioFile" className="bg-green-300 w-[90%] py-2 rounded-lg text-green-900 text-center mt-1 mb-4 border-none focus:outline-none block mt-8 cursor-pointer">
+                            <label htmlFor="audioFile" id="audioFileLabel" className="bg-green-300 w-[90%] py-2 rounded-lg text-green-900 text-center mt-1 mb-4 border-none focus:outline-none block mt-8 cursor-pointer">
                                 Upload MP3 File
                             </label>
                             <input

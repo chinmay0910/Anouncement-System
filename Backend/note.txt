@@ -1,0 +1,11 @@
+@reboot sudo sysctl fs.protected_fifos=0
+@reboot sudo systemctl restart mopidy
+
+
+57 10 1 1 * mpc clear
+58 10 1 1 * mpc add nation.mp3
+60 10 1 1 * mpc play
+
+58 11 6 2 * mpc clear
+59 11 6 2 * mpc add Imagination1.mp3
+0 12 6 2 * mpc play
