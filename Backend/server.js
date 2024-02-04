@@ -39,9 +39,9 @@ const upload = multer({ storage: storage, limits: { fileSize: 1024 * 1024 * 50 }
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'pradip',
-    database: 'kanchan',
-    port: '3307'
+    password: 'yashshree',
+    database: 'anouncements',
+    // port: '3307'
 });
 
 const queryAsync = util.promisify(db.query).bind(db);

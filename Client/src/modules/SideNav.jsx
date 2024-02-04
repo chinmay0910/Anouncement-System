@@ -43,9 +43,9 @@ export const SideNav = () => {
             <NavLink to='/update' role='button' className={({ isActive }) => isActive ? "bg-blue-200" : "hover:bg-[#F0F6FF]"}>
                 <IconFileDescription className='md:mx-8' /> <h1>Anouncement Logs</h1>
             </NavLink>
-            <NavLink to='/announcement' role='button' className={({ isActive }) => isActive ? "bg-blue-200" : "hover:bg-[#F0F6FF]"}>
+            {/* <NavLink to='/announcement' role='button' className={({ isActive }) => isActive ? "bg-blue-200" : "hover:bg-[#F0F6FF]"}>
                 <Icon24Hours className='md:mx-8' /> <h1>Daily Anouncements</h1>
-            </NavLink>
+            </NavLink> */}
             <NavLink to='settings' role='button' className={({ isActive }) => isActive ? "bg-blue-200" : "hover:bg-[#F0F6FF]"}>
                 <IconSettings className='md:mx-8 ' /> <h1>Settings</h1>
             </NavLink>
