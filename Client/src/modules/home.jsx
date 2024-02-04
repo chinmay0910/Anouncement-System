@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 
 // Component Imports , RegisterPage, Update, UpdateStatus, CreatePost, AddStaff 
-import { TopNavigation, SideNav, ScheduleAnouncementsPage, Announcement,Update} from './index'
+import { TopNavigation, SideNav, ScheduleAnouncementsPage, Announcement,Update, EditAnnouncementsPage} from './index'
 import './home.css'
 
 // React-Router Imports
@@ -34,6 +34,7 @@ export const Home = () => {
                             <Route exact path='/schedule' element={<ScheduleAnouncementsPage />} />
                             <Route exact path='/announcement' element={<Announcement/>}/>
                             <Route exact path='/update' element={<Update />} />
+                            <Route path="/edit/:id" element={<EditAnnouncementsPage />} />
                             
 
                             {/* <Route exact path='/addstaff' element={<AddStaff />} />
